@@ -13,6 +13,7 @@ class App extends Component {
       currentNote: null,
       currentNoteNo: null,
       currentSelection: null,
+      canGuessFurther: true,
       pitches: [
         "G",
         "A",
@@ -56,9 +57,10 @@ class App extends Component {
 
   handleSelection(guessedNote) {
     if (guessedNote === this.state.currentNote[0]) {
-      this.setState({ message: "Brawo!", score: this.state.score + 1 });
+      this.setState({ message: "Brawo!", score: this.state.score + 1, canGuessFurther: false });
       setTimeout(() => {
         this.generateNewNote();
+        this.setState({canGuessFurther:true});
       }, 3000);
     } else if (guessedNote !== this.state.currentNote[0]) {
       this.setState({ message: "Spróbuj jeszcze raz" });
