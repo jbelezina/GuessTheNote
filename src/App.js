@@ -56,14 +56,20 @@ class App extends Component {
   }
 
   handleSelection(guessedNote) {
-    if (guessedNote === this.state.currentNote[0]) {
-      this.setState({ message: "Brawo!", score: this.state.score + 1, canGuessFurther: false });
-      setTimeout(() => {
-        this.generateNewNote();
-        this.setState({canGuessFurther:true});
-      }, 3000);
-    } else if (guessedNote !== this.state.currentNote[0]) {
-      this.setState({ message: "Spróbuj jeszcze raz" });
+    if (this.state.canGuessFurther) {
+      if (guessedNote === this.state.currentNote[0]) {
+        this.setState({
+          message: "Brawo!",
+          score: this.state.score + 1,
+          canGuessFurther: false
+        });
+        setTimeout(() => {
+          this.generateNewNote();
+          this.setState({ canGuessFurther: true });
+        }, 3000);
+      } else if (guessedNote !== this.state.currentNote[0]) {
+        this.setState({ message: "Spróbuj jeszcze raz" });
+      }
     }
   }
 
@@ -88,8 +94,8 @@ class App extends Component {
     let scoreStyle = {
       position: "fixed",
       fontFamily: '"Great Vibes", cursive',
-      fontSize: "30px",
-      marginTop: "20px"
+      fontSize: "40px",
+      marginTop: "40px"
     };
 
     return (
