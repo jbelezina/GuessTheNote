@@ -3,75 +3,37 @@ import Stave from "./Stave";
 import Controls from "./Controls";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "./App.css";
+import { connect } from "react-redux";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      score: 0,
-      message: "Jaka to nutka?",
-      currentNote: null,
-      currentNoteNo: null,
-      currentSelection: null,
-      canGuessFurther: true,
-      pitches: [
-        "G",
-        "A",
-        "H",
-        "C",
-        "D",
-        "E",
-        "F",
-        "G1",
-        "A1",
-        "H1",
-        "C1",
-        "D1",
-        "E1",
-        "F1",
-        "G2",
-        "A2",
-        "H2"
-      ]
-    };
-
-    this.generateNewNote = this.generateNewNote.bind(this);
-    this.handleSelection = this.handleSelection.bind(this);
-  }
-
   componentDidMount() {
     this.generateNewNote();
   }
 
-  generateNewNote() {
-    let randomNo = Math.floor(Math.random() * 17);
-    let newNote = this.state.pitches[randomNo];
-    console.log("new note: " + newNote + " random no.: " + randomNo);
-    this.setState({
-      currentNote: newNote,
-      currentNoteNo: randomNo,
-      message: "Jaka to nutka?",
-      currentSelection: null
-    });
-  }
+  generateNewNote = () => {
+    console.log("generating a note");
+    let newNoteNumber = Math.floor(Math.random() * 17);
+    this.props.setNewNote(newNoteNumber);
+    this.props.setMessageTo("Jak to nutka?");
+    this.props.unblockGuessing();
+  };
 
-  handleSelection(guessedNote) {
-    if (this.state.canGuessFurther) {
-      if (guessedNote === this.state.currentNote[0]) {
-        this.setState({
-          message: "Brawo!",
-          score: this.state.score + 1,
-          canGuessFurther: false
-        });
+  handleSelection = guessedNote => {
+    if (this.props.canGuess) {
+      if (guessedNote === this.props.currentNote[0]) {
+        this.props.setMessageTo("Brawo!");
+        this.props.incrementScore();
+        this.props.blockGuessing();
         setTimeout(() => {
           this.generateNewNote();
-          this.setState({ canGuessFurther: true });
+          this.props.unblockGuessing();
+          this.props.setMessageTo("Jaka to nutka?");
         }, 3000);
-      } else if (guessedNote !== this.state.currentNote[0]) {
-        this.setState({ message: "Spróbuj jeszcze raz" });
+      } else {
+        this.props.setMessageTo("Spróbuj ponownie");
       }
     }
-  }
+  };
 
   render() {
     let staveDiv = {
@@ -102,13 +64,13 @@ class App extends Component {
       <div className="App">
         <div className="container">
           <div className="row">
-            <h1 style={messageStyle}>{this.state.message}</h1>
-            <h1 style={scoreStyle}>Twój wynik: {this.state.score}</h1>
+            <h1 style={messageStyle}>{this.props.message}</h1>
+            <h1 style={scoreStyle}>Twój wynik: {this.props.score}</h1>
           </div>
           <div className="row" style={staveDiv}>
             <Stave
-              currentNote={this.state.currentNote}
-              currentNoteNo={this.state.currentNoteNo}
+              currentNote={this.props.currentNote}
+              currentNoteNo={this.props.currentNoteNumber}
             />
           </div>
           <div className="row">
@@ -120,4 +82,50 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    message: state.message,
+    pitches: state.pitches,
+    score: state.score,
+    canGuess: state.canGuess,
+    currentNote: state.currentNote,
+    currentNoteNumber: state.currentNoteNumber
+  };
+};
+
+const mapDispachToProps = dispach => {
+  return {
+    setMessageTo: message => {
+      dispach({
+        type: "CHANGE_MESSAGE",
+        value: message
+      });
+    },
+    incrementScore: () => {
+      dispach({
+        type: "SCORE_UP"
+      });
+    },
+    blockGuessing: () => {
+      dispach({
+        type: "BLOCK_GUESSING"
+      });
+    },
+    unblockGuessing: () => {
+      dispach({
+        type: "UNBLOCK_GUESSING"
+      });
+    },
+    setNewNote: newNoteNumber => {
+      dispach({
+        type: "SET_NEW_NOTE",
+        value: newNoteNumber
+      });
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispachToProps
+)(App);

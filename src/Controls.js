@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 class Controls extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     let style = {
       position: "absolute",

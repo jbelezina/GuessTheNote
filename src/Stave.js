@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import stave from "./stave.png";
 import Note from "./Note";
 
