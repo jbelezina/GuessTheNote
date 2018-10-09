@@ -44,6 +44,10 @@ const reducer = (state = initialState, action) => {
     newState.canGuess = true;
   }
 
+  if (action.type === "RESET_SCORE") {
+    newState.score = 0;
+  }
+
   if (action.type === "SET_NEW_NOTE") {
     console.log("new note number from SET_NEW_NOTE reducer" + action.value);
     newState.currentNoteNumber = action.value;

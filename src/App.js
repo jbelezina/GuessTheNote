@@ -71,12 +71,32 @@ class App extends Component {
       position: "relative"
     };
 
+    let resetButton;
+
+    if (this.props.score > 0) {
+      resetButton = (
+        <button
+          className="btn btn-danger"
+          style={{
+            paddingTop: "10px",
+            marginBottom: "10px",
+            marginLeft: "20px"
+          }}
+          onClick={this.props.resetScore}
+        >
+          <i class="fas fa-undo-alt" />
+        </button>
+      );
+    }
+
     return (
       <div className="App">
         <div className="container" style={containerStyle}>
           <div className="row">
             <h1 style={messageStyle}>{this.props.message}</h1>
-            <h1 style={scoreStyle}>Twój wynik: {this.props.score}</h1>
+            <h1 style={scoreStyle}>
+              Twój wynik: {this.props.score} {resetButton}
+            </h1>
           </div>
           <div style={controlsStyle}>
             <Controls handleSelection={this.handleSelection} />
@@ -131,6 +151,11 @@ const mapDispachToProps = dispach => {
       dispach({
         type: "SET_NEW_NOTE",
         value: newNoteNumber
+      });
+    },
+    resetScore: () => {
+      dispach({
+        type: "RESET_SCORE"
       });
     }
   };
