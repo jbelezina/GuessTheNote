@@ -3,18 +3,12 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css";
 
 class Controls extends Component {
   render() {
-    let style = {
-      position: "absolute",
-      top: "600px",
-      left: "35vw"
-    };
-
     let btnStyle = {
       margin: "10px"
     };
 
     return (
-      <div style={style}>
+      <div>
         <button
           type="button"
           className="btn btn-secondary btn-lg"

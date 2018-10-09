@@ -14,7 +14,7 @@ class App extends Component {
     console.log("generating a note");
     let newNoteNumber = Math.floor(Math.random() * 17);
     this.props.setNewNote(newNoteNumber);
-    this.props.setMessageTo("Jak to nutka?");
+    this.props.setMessageTo("Jaka to nutka?");
     this.props.unblockGuessing();
   };
 
@@ -37,44 +37,55 @@ class App extends Component {
 
   render() {
     let staveDiv = {
+      position: "absolute",
       width: "500px",
       height: "500px",
-      position: "fixed",
-      top: "120px",
+      top: "25vh",
       left: "37vw"
     };
 
     let messageStyle = {
+      position: "absolute",
       fontFamily: '"Great Vibes", cursive',
       fontSize: "70px",
-      margin: "auto",
-      verticalAlign: "middle",
-      marginTop: "40px",
-      marginBottom: "40px"
+      top: "0vh",
+      left: "38vw"
     };
 
     let scoreStyle = {
-      position: "fixed",
+      postion: "absolute",
       fontFamily: '"Great Vibes", cursive',
-      fontSize: "40px",
-      marginTop: "40px"
+      fontSize: "60px",
+      top: "0vh",
+      left: "5vw"
+    };
+
+    let controlsStyle = {
+      position: "absolute",
+      top: "8vw",
+      left: "35vw"
+    };
+
+    let containerStyle = {
+      margin: "50px",
+      position: "relative"
     };
 
     return (
       <div className="App">
-        <div className="container">
+        <div className="container" style={containerStyle}>
           <div className="row">
             <h1 style={messageStyle}>{this.props.message}</h1>
             <h1 style={scoreStyle}>Twój wynik: {this.props.score}</h1>
           </div>
-          <div className="row" style={staveDiv}>
+          <div style={controlsStyle}>
+            <Controls handleSelection={this.handleSelection} />
+          </div>
+          <div style={staveDiv}>
             <Stave
               currentNote={this.props.currentNote}
               currentNoteNo={this.props.currentNoteNumber}
             />
-          </div>
-          <div className="row">
-            <Controls handleSelection={this.handleSelection} />
           </div>
         </div>
       </div>
