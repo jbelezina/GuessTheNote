@@ -5,17 +5,14 @@ import Note from "./Note";
 const Stave = props => {
   return (
     <div>
-      <img
-        src={stave}
+      <div
         style={{
-          position: "absolute",
-          top: "57px",
-          left: "10%"
+          position: "relative",
+          top: "0vh",
+          left: "5vw"
         }}
-        width="300"
-        alt="stave"
-      />
-      <div style={{ position: "absolute" }}>
+      >
+        <img src={stave} width="200" alt="stave" />
         <Note pitch={props.currentNote} noteNo={props.currentNoteNo} />
       </div>
     </div>

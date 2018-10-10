@@ -21,7 +21,7 @@ class App extends Component {
   handleSelection = guessedNote => {
     if (this.props.canGuess) {
       if (guessedNote === this.props.currentNote[0]) {
-        this.props.setMessageTo("Brawo!");
+        this.props.setMessageTo("     Brawo!");
         this.props.incrementScore();
         this.props.blockGuessing();
         setTimeout(() => {
@@ -36,39 +36,43 @@ class App extends Component {
   };
 
   render() {
-    let staveDiv = {
-      position: "absolute",
-      width: "500px",
-      height: "500px",
-      top: "25vh",
-      left: "37vw"
+    let scoreStyle = {
+      position: "relative",
+      fontFamily: '"Great Vibes", cursive',
+      fontSize: "40px",
+      float: "right",
+      marginTop: "-15%",
+      marginRight: "-30%"
+    };
+
+    let staveStyle = {
+      position: "relative",
+      zIndex: "-1",
+      top: "-30px",
+      left: "20%"
     };
 
     let messageStyle = {
-      position: "absolute",
+      position: "relative",
       fontFamily: '"Great Vibes", cursive',
       fontSize: "70px",
-      top: "0vh",
-      left: "38vw"
-    };
-
-    let scoreStyle = {
-      postion: "absolute",
-      fontFamily: '"Great Vibes", cursive',
-      fontSize: "60px",
-      top: "0vh",
-      left: "5vw"
+      left: "25%",
+      marginTop: "20%"
     };
 
     let controlsStyle = {
-      position: "absolute",
-      top: "8vw",
-      left: "35vw"
+      position: "relative",
+      marginTop: "5%",
+      marginBottom: "10%",
+      left: "20%"
     };
 
     let containerStyle = {
-      margin: "50px",
-      position: "relative"
+      position: "relative",
+      zIndex: "3",
+      marginTop: "10vh",
+      marginLeft: "30vw",
+      marginRight: "30vw"
     };
 
     let resetButton;
@@ -84,29 +88,28 @@ class App extends Component {
           }}
           onClick={this.props.resetScore}
         >
-          <i class="fas fa-undo-alt" />
+          <i className="fas fa-undo-alt" />
         </button>
       );
     }
 
     return (
-      <div className="App">
-        <div className="container" style={containerStyle}>
-          <div className="row">
-            <h1 style={messageStyle}>{this.props.message}</h1>
-            <h1 style={scoreStyle}>
-              Twój wynik: {this.props.score} {resetButton}
-            </h1>
-          </div>
-          <div style={controlsStyle}>
-            <Controls handleSelection={this.handleSelection} />
-          </div>
-          <div style={staveDiv}>
-            <Stave
-              currentNote={this.props.currentNote}
-              currentNoteNo={this.props.currentNoteNumber}
-            />
-          </div>
+      <div style={containerStyle}>
+        <h1 style={scoreStyle}>
+          Twój wynik: {this.props.score} {resetButton}
+        </h1>
+
+        <h1 style={messageStyle}>{this.props.message}</h1>
+
+        <div style={controlsStyle}>
+          <Controls handleSelection={this.handleSelection} />
+        </div>
+
+        <div style={staveStyle}>
+          <Stave
+            currentNote={this.props.currentNote}
+            currentNoteNo={this.props.currentNoteNumber}
+          />
         </div>
       </div>
     );

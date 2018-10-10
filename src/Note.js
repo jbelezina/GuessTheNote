@@ -9,136 +9,136 @@ class Note extends Component {
       case "G":
         style = {
           position: "absolute",
-          left: 160,
-          top: 268
+          left: 65,
+          top: 142
         };
         break;
 
       case "A":
         style = {
           position: "absolute",
-          left: 160,
-          top: 247
+          left: 65,
+          top: 128
         };
         break;
 
       case "H":
         style = {
           position: "absolute",
-          left: 160,
-          top: 225
+          left: 65,
+          top: 112
         };
         break;
 
       case "C":
         style = {
           position: "absolute",
-          left: 160,
-          top: 203
+          left: 65,
+          top: 100
         };
         break;
 
       case "D":
         style = {
           position: "absolute",
-          left: 160,
-          top: 182
+          left: 65,
+          top: 83
         };
         break;
 
       case "E":
         style = {
           position: "absolute",
-          left: 160,
-          top: 161
+          left: 65,
+          top: 70
         };
         break;
 
       case "F":
         style = {
           position: "absolute",
-          left: 160,
-          top: 138
+          left: 65,
+          top: 55
         };
         break;
 
       case "G1":
         style = {
           position: "absolute",
-          left: 160,
-          top: 118
+          left: 65,
+          top: 42
         };
         break;
 
       case "A1":
         style = {
           position: "absolute",
-          left: 160,
-          top: 95
+          left: 65,
+          top: 26
         };
         break;
 
       case "H1":
         style = {
           position: "absolute",
-          left: 160,
-          top: 75
+          left: 65,
+          top: 12
         };
         break;
 
       case "C1":
         style = {
           position: "absolute",
-          left: 160,
-          top: 189
+          left: 65,
+          top: 88
         };
         break;
 
       case "D1":
         style = {
           position: "absolute",
-          left: 160,
-          top: 169
+          left: 65,
+          top: 77
         };
         break;
 
       case "E1":
         style = {
           position: "absolute",
-          left: 160,
-          top: 147
+          left: 65,
+          top: 60
         };
         break;
 
       case "F1":
         style = {
           position: "absolute",
-          left: 160,
-          top: 123
+          left: 65,
+          top: 45
         };
         break;
 
       case "G2":
         style = {
           position: "absolute",
-          left: 160,
-          top: 101
+          left: 65,
+          top: 30
         };
         break;
 
       case "A2":
         style = {
           position: "absolute",
-          left: 160,
-          top: 77
+          left: 65,
+          top: 15
         };
         break;
 
       case "H2":
         style = {
           position: "absolute",
-          left: 160,
-          top: 55
+          left: 65,
+          top: 0
         };
         break;
     }
@@ -152,7 +152,7 @@ class Note extends Component {
 
     return (
       <div>
-        <img src={note} style={style} width="170" height="196" alt="note" />
+        <img src={note} style={style} width="130" height="130" alt="note" />
       </div>
     );
   }

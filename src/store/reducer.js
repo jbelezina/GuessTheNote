@@ -52,7 +52,10 @@ const reducer = (state = initialState, action) => {
     console.log("new note number from SET_NEW_NOTE reducer" + action.value);
     newState.currentNoteNumber = action.value;
 
-    console.log("new note name from SET_NEW_NOTE reducer" + action.value);
+    console.log(
+      "new note name from SET_NEW_NOTE reducer " +
+        newState.pitches[action.value]
+    );
     newState.currentNote = newState.pitches[action.value];
   }
 
