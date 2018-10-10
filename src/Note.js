@@ -42,7 +42,7 @@ class Note extends Component {
         style = {
           position: "absolute",
           left: 65,
-          top: 83
+          top: 84
         };
         break;
 

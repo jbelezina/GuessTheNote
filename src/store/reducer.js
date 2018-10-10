@@ -22,7 +22,8 @@ const initialState = {
   score: 0,
   canGuess: true,
   currentNote: null,
-  currentNoteNumber: null
+  currentNoteNumber: null,
+  recycle: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -46,6 +47,11 @@ const reducer = (state = initialState, action) => {
 
   if (action.type === "RESET_SCORE") {
     newState.score = 0;
+  }
+
+  if (action.type === "RUN_CONFETTI") {
+    //newState.runConfetti = action.value;
+    newState.recycle = action.value;
   }
 
   if (action.type === "SET_NEW_NOTE") {

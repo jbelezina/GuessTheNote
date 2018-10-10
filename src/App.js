@@ -4,6 +4,7 @@ import Controls from "./Controls";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import { connect } from "react-redux";
+import Confetti from "react-confetti";
 
 class App extends Component {
   componentDidMount() {
@@ -21,10 +22,12 @@ class App extends Component {
   handleSelection = guessedNote => {
     if (this.props.canGuess) {
       if (guessedNote === this.props.currentNote[0]) {
+        this.props.runConfetti(true);
         this.props.setMessageTo("     Brawo!");
         this.props.incrementScore();
         this.props.blockGuessing();
         setTimeout(() => {
+          this.props.runConfetti(false);
           this.generateNewNote();
           this.props.unblockGuessing();
           this.props.setMessageTo("Jaka to nutka?");
@@ -64,7 +67,7 @@ class App extends Component {
       position: "relative",
       marginTop: "5%",
       marginBottom: "10%",
-      left: "20%"
+      left: "14%"
     };
 
     let containerStyle = {
@@ -94,22 +97,41 @@ class App extends Component {
     }
 
     return (
-      <div style={containerStyle}>
-        <h1 style={scoreStyle}>
-          Twój wynik: {this.props.score} {resetButton}
-        </h1>
-
-        <h1 style={messageStyle}>{this.props.message}</h1>
-
-        <div style={controlsStyle}>
-          <Controls handleSelection={this.handleSelection} />
-        </div>
-
-        <div style={staveStyle}>
-          <Stave
-            currentNote={this.props.currentNote}
-            currentNoteNo={this.props.currentNoteNumber}
+      <div>
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%"
+          }}
+        >
+          <Confetti
+            width={window.innerWidth}
+            height={window.innerHeight}
+            numberOfPieces={300}
+            run={true}
+            recycle={this.props.recycle}
           />
+        </div>
+        <div style={containerStyle}>
+          <h1 style={scoreStyle}>
+            Twój wynik: {this.props.score} {resetButton}
+          </h1>
+
+          <h1 style={messageStyle}>{this.props.message}</h1>
+
+          <div style={controlsStyle}>
+            <Controls handleSelection={this.handleSelection} />
+          </div>
+
+          <div style={staveStyle}>
+            <Stave
+              currentNote={this.props.currentNote}
+              currentNoteNo={this.props.currentNoteNumber}
+            />
+          </div>
         </div>
       </div>
     );
@@ -123,7 +145,8 @@ const mapStateToProps = state => {
     score: state.score,
     canGuess: state.canGuess,
     currentNote: state.currentNote,
-    currentNoteNumber: state.currentNoteNumber
+    currentNoteNumber: state.currentNoteNumber,
+    recycle: state.recycle
   };
 };
 
@@ -159,6 +182,12 @@ const mapDispachToProps = dispach => {
     resetScore: () => {
       dispach({
         type: "RESET_SCORE"
+      });
+    },
+    runConfetti: bool => {
+      dispach({
+        type: "RUN_CONFETTI",
+        value: bool
       });
     }
   };
