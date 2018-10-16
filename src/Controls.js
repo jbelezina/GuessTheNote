@@ -17,7 +17,7 @@ class Controls extends Component {
             this.props.handleSelection("C");
           }}
         >
-          C
+          {this.props.solmi ? "DO" : "C"}
         </button>
         <button
           type="button"
@@ -27,7 +27,7 @@ class Controls extends Component {
             this.props.handleSelection("D");
           }}
         >
-          D
+          {this.props.solmi ? "RE" : "D"}
         </button>
         <button
           type="button"
@@ -37,7 +37,7 @@ class Controls extends Component {
             this.props.handleSelection("E");
           }}
         >
-          E
+          {this.props.solmi ? "MI" : "E"}
         </button>
         <button
           type="button"
@@ -47,7 +47,7 @@ class Controls extends Component {
             this.props.handleSelection("F");
           }}
         >
-          F
+          {this.props.solmi ? "FA" : "F"}
         </button>
         <button
           type="button"
@@ -57,7 +57,7 @@ class Controls extends Component {
             this.props.handleSelection("G");
           }}
         >
-          G
+          {this.props.solmi ? "SOL" : "G"}
         </button>
         <button
           type="button"
@@ -67,7 +67,7 @@ class Controls extends Component {
             this.props.handleSelection("A");
           }}
         >
-          A
+          {this.props.solmi ? "LA" : "A"}
         </button>
         <button
           type="button"
@@ -77,7 +77,7 @@ class Controls extends Component {
             this.props.handleSelection("H");
           }}
         >
-          H
+          {this.props.solmi ? "SI" : "H"}
         </button>
       </div>
     );

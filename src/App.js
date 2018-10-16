@@ -123,7 +123,26 @@ class App extends Component {
           <h1 style={messageStyle}>{this.props.message}</h1>
 
           <div style={controlsStyle}>
-            <Controls handleSelection={this.handleSelection} />
+            <Controls
+              handleSelection={this.handleSelection}
+              solmi={this.props.solmi}
+            />
+            <div
+              style={{
+                position: "absolute",
+                left: "30px",
+                fontFamily: '"Great Vibes", cursive',
+                fontSize: "20px"
+              }}
+            >
+              <input
+                style={{ marginRight: "20px", marginTop: "10px" }}
+                type="checkbox"
+                onChange={this.props.toggleSolmi}
+                defaultChecked={this.props.solmi}
+              />
+              <label for="solmi"> Solmizacja</label>
+            </div>
           </div>
 
           <div style={staveStyle}>
@@ -146,7 +165,8 @@ const mapStateToProps = state => {
     canGuess: state.canGuess,
     currentNote: state.currentNote,
     currentNoteNumber: state.currentNoteNumber,
-    recycle: state.recycle
+    recycle: state.recycle,
+    solmi: state.solmi
   };
 };
 
@@ -188,6 +208,11 @@ const mapDispachToProps = dispach => {
       dispach({
         type: "RUN_CONFETTI",
         value: bool
+      });
+    },
+    toggleSolmi: () => {
+      dispach({
+        type: "TOGGLE_SOLMI"
       });
     }
   };

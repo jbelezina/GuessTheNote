@@ -23,7 +23,8 @@ const initialState = {
   canGuess: true,
   currentNote: null,
   currentNoteNumber: null,
-  recycle: false
+  recycle: false,
+  solmi: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,6 +53,11 @@ const reducer = (state = initialState, action) => {
   if (action.type === "RUN_CONFETTI") {
     //newState.runConfetti = action.value;
     newState.recycle = action.value;
+  }
+
+  if (action.type === "TOGGLE_SOLMI") {
+    //newState.runConfetti = action.value;
+    newState.solmi = !newState.solmi;
   }
 
   if (action.type === "SET_NEW_NOTE") {
